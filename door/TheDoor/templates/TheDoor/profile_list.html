@@ -1,0 +1,21 @@
+
+<!-- Shows all of the users in one big list-->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+
+{% for profile in profiles %}
+
+    <div>
+        <a href="{% url 'The Door:profile' profile.id %}">
+            <p>{{ profile.user.username}}</p>
+        </a>
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock content %}

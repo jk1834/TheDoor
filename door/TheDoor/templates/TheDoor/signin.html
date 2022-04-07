@@ -1,0 +1,20 @@
+
+
+
+<h2>The DOOR: Log In</h2>
+
+<form action="/TheDoor/signin/" method="post">
+    {% csrf_token %}
+    <label for="">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter Your Username" required>
+    <br>
+
+    <label for="">Password</label>
+    <input type="password" id="pass1" name="pass1" placeholder="Enter Your Password" required>
+    <br>
+
+        
+    <button type="submit">Log In</button>
+</form>
+
+

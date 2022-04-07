@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content%}
+
+
+<!-- Simply brings you back to the menu with all of the profiles-->
+<div class="block">
+    <a href="{% url 'The Door:profile_list' %}">
+        <button>
+            All Profiles
+        </button>
+    </a>
+</div>
+
+<!-- This code below handles the follow and unfollow functionalities-->
+<form method="post">
+    {% csrf_token %}
+    <div class="buttons has-addons">
+    {% if profile in user.profile.friends.all %}
+    <!-- This class grey's out the follow/unfollow button if either ofthe requirements have alreay been met-->
+        <button class="button is-success is-static">Follow</button>
+        <button class="button is-danger" name="follow" value="unfollow">Unfollow</button>
+    {% else %}
+        <button class="button is-success" name="follow" value="follow">Follow</button>
+        <button class="button is-danger is-static">Unfollow</button>
+    {% endif %}
+    </div>
+</form>
+
+<!-- Shows all of the user's posts and when they were made-->
+<h3>{{profile.user.username}}'s Posts:</h3>
+<div class="content">
+    {% for tweet in profile.user.posts.all %}
+    <div class="box">
+        {{ tweet.body }}
+        <span class="is-small has-text-grey-light">
+            ({{ tweet.created_at }})
+        </span>
+    </div>
+    {% endfor %}
+</div>
+
+
+<!-- These last two snippets of code simply show their friend's list-->
+<ul>
+    <h3> {{profile.user.username}} follows:</h3>
+    {% for friend in profile.friends.all %}
+        <a href="{% url 'The Door:profile' friend.id %}">
+            <li>{{ friend }}</li>
+        </a>
+    {% endfor %}
+
+</ul>
+
+<ul>
+    <h3>{{profile.user.username}} is followed by: </h3>
+    {% for friend in profile.followed_by.all %}
+    
+        <a href="{% url 'The Door:profile' friend.id %}">
+            <li>{{ friend }}</li>
+        </a>
+    {% endfor %}
+    
+</ul>
+
+
+
+{% endblock content %}
