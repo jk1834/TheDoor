@@ -20,7 +20,7 @@
             <h1>The DOOR</h1>
         </section>
     </a>
-    <!-- Otherwise, give them options to login or make an account-->>
+    <!-- Otherwise, give them options to login or make an account-->
     {% else %}
     <h1> The DOOR </h1>
     <button type="submit">
@@ -29,7 +29,7 @@
         </a>
     </button><br>
     <button type="submit">
-        <a href="/signup">
+        <a href="{% url 'The Door:signup' %}">
             Sign Up
         </a>
     </button><br>
