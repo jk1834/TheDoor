@@ -22,3 +22,5 @@ Features: The platform will do the following:
   User can send and accept friend requests from others,
   Interact with friends, 
   User can comment, and share the status/timeline post of their friends
+
+![Updates](https://github.com/Intro-to-SE-lab-Spring-22/Group-4/blob/main/UPDATES.md)
