@@ -47,7 +47,7 @@ class loginTests(TestCase):
 class signupTests(TestCase):
     def test_signup1(self):
         # Should Pass, all info is correct
-        self.asserEquals(valid_signup("jk1834", "Wtge0897", "Wtge0897", "Bob", "Smith"))
+        self.assertEquals(valid_signup("jk1834", "Wtge0897", "Wtge0897", "Bob", "Smith"), False)
 
     def test_signup2(self):
         # Should fail because password does not meet requirements
