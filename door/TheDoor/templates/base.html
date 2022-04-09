@@ -5,9 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The DOOR</title>
+     <!-- begin CSS block: centering titles, adds background image-->
+<style>
+     
+    h1{
+    /* centers all h1 headers in website*/
+    text-align:center;  
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    }
+    h2{
+     /* centers all h2 headers in website*/   
+    text-align:center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    body{
+    /*adds background image*/
+    background-image:url("https://th.bing.com/th/id/R.30fb92e53a39c769bf07254916402e32?rik=nO122%2bXWPFOG6g&riu=http%3a%2f%2fblog.uvm.edu%2fcareer-center%2ffiles%2f2016%2f09%2fopen-door.jpeg&ehk=OT33sRS4RPiOn1ndcOaitkXgzudNn5PVU1yYtNdcZoI%3d&risl=1&pid=ImgRaw&r=0");
+    background-position:center;
+    text-align:center;
+    }
+    div.entire{
+    border-radius: 25px;
+    padding: 20px;
+    width: 400px;
+    height: auto;
+    background-color:lightskyblue;
+    margin-top: 100px;
+    margin-left:525px;
+    position:absolute;
+    
+    }
+     
+</style>
 </head>
 <body>
-
+    <div class=entire>
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         <strong>Message: </strong> {{ message }}
@@ -41,6 +74,6 @@
     </div>
     
     <script src="" async defer></script>
-
+</div>
 </body>
 </html>
