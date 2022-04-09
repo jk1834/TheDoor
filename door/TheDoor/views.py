@@ -80,37 +80,43 @@ def is_special_character(password):
 
 # Handles all signup functionality
 def signup(request):
-    
+
     if request.method == "POST":
         # Records all information needed for checks and user creation
-        username = request.POST.get('username')
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
+        username = request.POST.get("username")
+        firstname = request.POST.get("firstname")
+        lastname = request.POST.get("lastname")
         email = None
-        pass1 = request.POST.get('pass1')
-        pass2 = request.POST.get('pass2')
+        pass1 = request.POST.get("pass1")
+        pass2 = request.POST.get("pass2")
 
         # Checks if username has already been taken
-        if User.objects.filter(username = username).first():
+        if User.objects.filter(username=username).first():
             messages.error(request, "This username is already taken.")
-            return render(request, 'TheDoor/signup.html')
+            return render(request, "TheDoor/signup.html")
 
         # VALIDATION GOES HERE
         # Makes sure that all characters in username are only alphanumeric
         if not username.isalnum():
-            messages.error(request, "Make sure your username only contains numbers and letters.")
-            return render(request, 'TheDoor/signup.html')
-        
+            messages.error(
+                request, "Make sure your username only contains numbers and letters."
+            )
+            return render(request, "TheDoor/signup.html")
+
         # Makes sure the password falls under specified character conditions
         if (not is_special_character(pass1)) or len(pass1) <= 8:
-            messages.error(request, "Your password must include at least one of the following: \"! @ # $ % ^ & * - _ . /\" You must also include at least 8 characters.")
-            return render(request, 'TheDoor/signup.html')
+            messages.error(
+                request,
+                'Your password must include at least one of the following: "! @ # $ % ^ & * - _ . /" You must also include at least 8 characters.',
+            )
+            return render(request, "TheDoor/signup.html")
 
         # Makes sure the user's name only has alphabetical letters
         if (not firstname.isalpha()) or (not lastname.isalpha()):
-            messages.error(request, "Your first and last name must only include the letters a-z.")
-            return render(request, 'TheDoor/signup.html')
-    
+            messages.error(
+                request, "Your first and last name must only include the letters a-z."
+            )
+            return render(request, "TheDoor/signup.html")
 
         # Makes a new user and assigns basic properties, then saves that information to the Django database
         myuser = User.objects.create_user(username, email, pass1)
@@ -122,8 +128,9 @@ def signup(request):
         # Outputs success message and redirects user to the sign in page
         messages.success(request, "Your account has been successfully created!")
 
-        return render(request, 'TheDoor/signin.html')
-    return render(request, 'TheDoor/signup.html')
+        return render(request, "TheDoor/signin.html")
+    return render(request, "TheDoor/signup.html")
+
 
 # Handles login functionality
 def signin(request):

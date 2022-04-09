@@ -24,11 +24,12 @@ class UrlTests(TestCase):
     def test_homePage(self):
         response = self.client.get("/")
         self.assertEquals(response.status_code, 200)
-    
+
     # Should Fail because you need to have an account before going to dashboard
     def test_homeURL(self):
         response = self.client.get("dashboard")
         self.assertEquals(response.status_code, 200)
+
 
 # Tests different cases of login
 class loginTests(TestCase):
@@ -43,12 +44,19 @@ class loginTests(TestCase):
     def test_loginUser(self):
         assert authenticate(username="{user@,", password="j") is not None
 
+
 # Tests different inputs for sign up
 class signupTests(TestCase):
     def test_signup1(self):
         # Should Pass, all info is correct
-        self.assertEquals(valid_signup("jk1834", "Wtge0897", "Wtge0897", "Bob", "Smith"), False)
+        self.assertEquals(
+            valid_signup("jk1834", "Wtge0897", "Wtge0897", "Bob", "Smith"), False
+        )
 
     def test_signup2(self):
         # Should fail because password does not meet requirements
         self.assertEquals(valid_signup("jk1834", "k", "j", "Bob", "Smith"), True)
+
+class PostTest(TestCase):
+    def test_Post(self):
+        self.assert(,False)
