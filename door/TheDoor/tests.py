@@ -1,3 +1,4 @@
+from pickle import FALSE
 from sre_constants import FAILURE, SUCCESS
 from unittest.result import failfast
 from django.test import TestCase
@@ -57,6 +58,9 @@ class signupTests(TestCase):
         # Should fail because password does not meet requirements
         self.assertEquals(valid_signup("jk1834", "k", "j", "Bob", "Smith"), True)
 
+
 class PostTest(TestCase):
     def test_Post(self):
-        self.assert(,False)
+        if authenticate(related_name="posts") is not None:
+            return SUCCESS
+        return FALSE
