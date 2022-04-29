@@ -38,6 +38,12 @@ class UserPost(models.Model):
     body = models.CharField(max_length=140)
     # likes = models.ManyToManyField(User, default=None, blank=True, related_name="likes")
     created_at = models.DateTimeField(auto_now_add=True)
+<<<<<<< Updated upstream
+=======
+    likes =models.ManyToManyField(user, default=None, blank=True,related_name='likes')
+    updated = models.DateTimeField(auto_now = True)
+    
+>>>>>>> Stashed changes
 
     
     # Makes sure on the admin page that it is not labelled as 'object 1'
@@ -57,7 +63,22 @@ class UserPost(models.Model):
     def num_likes(self):
         return self.likes.all().count()
 
+<<<<<<< Updated upstream
 
+=======
+LIKE_CHOICES=(
+    ('Like', 'Like')
+    ('Unlike', 'Unlike')
+)
+
+class Like(models.Model):
+   user= models.ForeignKey(User, on_delete=models.CASCADE)
+   post= models.ForeignKey(UserPost, on_delete=models.CASCADE)
+   value=models.CharField(choices= LIKE_CHOICES, default='Like', max_length=30)
+
+def __str__(self):
+    return str(self.post)
+>>>>>>> Stashed changes
 
 
 

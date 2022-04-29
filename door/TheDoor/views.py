@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
-from .models import Profile, UserPost
+from .models import Profile, UserPost, Like
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -42,7 +42,7 @@ def profile_list(request):
 def profile(request, pk):
     profile = Profile.objects.get(pk=pk)
 
-    # Makes sure the suer exists
+    # Makes sure the user exists
     if not hasattr(request.user, "profile"):
         missing_profile = Profile(user=request.user)
         missing_profile.save()
