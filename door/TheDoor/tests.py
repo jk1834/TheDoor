@@ -61,6 +61,5 @@ class signupTests(TestCase):
 
 class PostTest(TestCase):
     def test_Post(self):
-        if authenticate(related_name="posts") is not None:
-            return SUCCESS
-        return FALSE
+        assert authenticate(related_name="posts") is not None
+
