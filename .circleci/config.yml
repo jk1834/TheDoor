@@ -28,6 +28,7 @@ jobs:
           command: |
             echo Running Test
             python -m unittest tests.py
+            make test
   
 
 # Invoke jobs via workflows
