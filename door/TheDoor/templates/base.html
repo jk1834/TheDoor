@@ -40,6 +40,10 @@
 </style>
 </head>
 <body>
+    <form method="POST">
+        {% csrf_token %}
+        {{comment_form.as_p}}
+    </form>> 
     <div class=entire>
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">

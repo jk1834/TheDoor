@@ -1,11 +1,14 @@
+from tokenize import Comment
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
-from .models import Profile, UserPost
+from .models import Post, Profile, UserPost
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import CommentForm
+
 
 
 def home(request):
@@ -155,3 +158,21 @@ def signin(request):
             return render(request, "TheDoor/signin.html")
 
     return render(request, "TheDoor/signin.html")
+#This function handles the list of comments from other users 
+def post_detailview(request, pk, id):
+    post = CommentForm(request.POST or None)
+    if request.method == "POST":
+        #cf = CommentForm(request.POST or None)
+        #if the user decides to comment then that comment is unique to that user 
+        if post.is_valid():
+            content = request.POST.get('content')
+            comment = Comment.objects.create(post = post, user = request.user, content = content)
+            comment.save()
+            return redirect(post.get_absolute_url())
+        else:
+            post = CommentForm()
+        
+        context = {
+            'comment_form': post,
+            }
+        return render(request, 'socio / base.html', context)

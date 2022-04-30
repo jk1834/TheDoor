@@ -1,8 +1,10 @@
-from tkinter.tix import AUTO
+from tkinter import Image
+from tkinter.tix import AUTO, IMAGE
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 # Base for profile class
 class Profile(models.Model):
@@ -56,3 +58,19 @@ class UserPost(models.Model):
     def num_likes(self):
         return self.likes.all().count()
 
+#this function allows the the user to atually make a comment. If the user chooses so to delete a comment, then it will make sure it deletes it from the database.
+class Post(models.Model):
+    image = models.ImageField(default = "default_foo.png", upload_to = "post_picture")
+    caption = models.TextField()
+    date_posted = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.author.username}\'s Post- {self.title}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.image.patch)
+        if img.height > 400 or img.width > 400: 
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
