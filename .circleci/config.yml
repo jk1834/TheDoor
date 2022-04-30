@@ -27,7 +27,8 @@ jobs:
       - run:
           command: |
             echo Running Test
-            python -m unittest tests.py
+            cd TheDoor/door/TheDoor
+            python tests.py
             make test
   
 
